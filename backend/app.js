@@ -12,6 +12,7 @@ const errorType = require('./middlewares/error');
 const NotExist = require('./errors/NotExist');
 const celebrate = require('./middlewares/celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.post('/signup', celebrate.userInfo, createUser);
 app.post('/signin', celebrate.userInfo, login);
 
 app.use(authorize);
+app.use(cors);
 
 app.use(router);
 
