@@ -27,12 +27,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(requestLogger);
+app.use(cors);
 
 app.post('/signup', celebrate.userInfo, createUser);
 app.post('/signin', celebrate.userInfo, login);
 
 app.use(authorize);
-app.use(cors);
 
 app.use(router);
 
