@@ -1,0 +1,12 @@
+.sign-in__title {
+  color: #FFF;
+  text-align: center;
+  margin: 60px auto 50px;
+}
+
+@media screen and (max-width: 620px) {
+  .sign-in__title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

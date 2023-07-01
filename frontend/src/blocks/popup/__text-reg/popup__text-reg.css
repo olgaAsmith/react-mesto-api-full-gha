@@ -1,0 +1,13 @@
+.popup__text-reg {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+}
+
+@media screen and (max-width: 620px) {
+  .popup__text-reg {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

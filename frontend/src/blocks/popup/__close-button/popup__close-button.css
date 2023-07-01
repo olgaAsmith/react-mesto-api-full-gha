@@ -1,0 +1,54 @@
+.popup__close-button {
+  position: absolute; /*расположить псевдоэлементы*/
+  width: 32px;
+  height: 32px;
+  top: -40px;
+  right: -40px;
+  background-color: transparent;
+  margin: 0 auto;
+}
+
+.popup__close-button:before { /*праая палочка Х*/
+  content: "";
+  width: 41px;
+  height: 4.5px;
+  position: absolute;
+  top: 12px;
+  left: -4px;
+  background: #FFF;
+  rotate: -45deg; /*горизонталь  0-45о направо*/
+}
+
+.popup__close-button:after { /*левая палочка Х*/
+  content: "";
+  width: 41px;
+  height: 4.5px;
+  position: absolute;
+  top: 12px;
+  left: -4px;
+  background: #FFF;
+  rotate: 45deg;
+}
+
+@media screen and (max-width: 620px){
+  .popup__close-button { /*PixelPerfect натсройка*/
+    width: 20px;
+    height: 20px;
+    right: 4px;
+    top: -40px;
+  }
+
+  .popup__close-button:before {
+    width: 26px;
+    height: 3.5px;
+    top: 10px;
+    left: -2px;
+  }
+
+  .popup__close-button:after {
+    width: 26px;
+    height: 3.5px;
+    top: 10px;
+    left: -2px;
+   }
+}

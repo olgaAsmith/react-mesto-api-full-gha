@@ -1,0 +1,12 @@
+.gallery__item {
+  position: relative;
+  background-color: #FFF;
+  border-radius: 3%; /*резка углов*/
+  color: #000;
+}
+
+@media screen and (max-width: 480px){
+  .gallery__item { /*PixelPerfect*/
+    min-height: 361px;
+  }
+}

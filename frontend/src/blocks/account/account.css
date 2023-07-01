@@ -1,0 +1,25 @@
+.account { /*"шапка" галереи, имя и доп инфо аккаунта*/
+  display: grid;
+  grid-template-columns: 120px 1fr 150px;
+  gap: 30px;
+  align-items: center;
+  color: #FFF;
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 760px){
+  .account {
+    display: flex;/*изменение в пользу флекса, располоожение элементов в колонку при менгньшем экране*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 42px;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .account {
+    gap: 0;
+  }
+}

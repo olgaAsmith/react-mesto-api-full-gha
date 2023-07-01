@@ -1,0 +1,6 @@
+.gallery__info {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  align-items: center;
+  margin: 25px 21px 31px;
+}

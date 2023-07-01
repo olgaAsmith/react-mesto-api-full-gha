@@ -1,0 +1,16 @@
+.account__add-image { /*кнопка добавления новой фото*/
+  width: 150px;
+  height: 50px;
+  background: no-repeat url(../../../images/+.svg);
+  background-position: center;
+  object-fit: cover;
+  border: 2px #FFF solid;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 760px){
+  .account__add-image {
+    width: 100%;
+    background-size: 16px 16px;
+  }
+}

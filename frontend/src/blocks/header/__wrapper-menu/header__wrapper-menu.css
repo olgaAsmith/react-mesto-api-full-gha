@@ -1,0 +1,13 @@
+@media screen and (max-width: 480px) {
+  .header__wrapper-menu {
+    display: none;
+    width: 100%;
+    min-height: 142px;
+    margin: auto;
+    border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
+  }
+
+  .header__wrapper-menu_active {
+    display: block;
+  }
+}

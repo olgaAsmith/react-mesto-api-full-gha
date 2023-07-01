@@ -1,0 +1,8 @@
+.popup__input {
+  margin-top: 30px;
+  padding: 5px 0 9px;
+}
+
+.popup__input.popup__input_type_error {
+  border-bottom: 1px solid #FF0000;
+}

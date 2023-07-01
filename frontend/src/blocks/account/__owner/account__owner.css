@@ -1,0 +1,17 @@
+.account__owner {
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) 1fr;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 480px){
+  .account__owner {
+      margin-top: 26px;
+  }
+}
+
+@-moz-document url-prefix() {
+  .account__owner {
+    align-items: center;
+  }
+}

@@ -1,0 +1,21 @@
+.popup__save { /*кнопка сохранитьt*/
+  width: 100%;
+  min-height: 50px;
+  border-radius: 2px;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  margin-top: 48px;
+}
+
+.popup__save:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 620px){
+  .popup__save {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 45px;
+  }
+}

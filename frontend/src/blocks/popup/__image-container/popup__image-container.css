@@ -1,0 +1,11 @@
+/*
+.popup__gallery-image {
+  display: flex;
+  justify-content: center;
+}
+*/
+
+.popup__image-container {
+  position: relative;
+  margin: 0;
+}

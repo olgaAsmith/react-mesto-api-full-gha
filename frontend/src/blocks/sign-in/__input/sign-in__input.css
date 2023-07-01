@@ -1,0 +1,10 @@
+.sign-in__input {
+  background-color: transparent;
+  border-bottom: 2px solid #CCCCCC;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+юsign-in__input::placeholder {
+  color: #CCC;;
+}

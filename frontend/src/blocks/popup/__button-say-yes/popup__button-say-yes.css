@@ -1,0 +1,5 @@
+.popup__button-say-yes {
+  width: calc(100% - 72px);
+  min-height: 50px;
+  margin-top: 38px;
+}

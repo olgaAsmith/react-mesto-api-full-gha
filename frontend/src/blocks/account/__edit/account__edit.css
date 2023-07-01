@@ -1,0 +1,31 @@
+.account__edit { /*кнопка изменения аккаунта*/
+  display: inline-block; /*размещение после текста*/
+  width: 24px;
+  height: 24px;
+  background: no-repeat url(../../../images/editor.svg);
+  background-position: center;
+  border: 1px #FFF solid;
+  margin-left: 18px;
+}
+
+@-moz-document url-prefix() {
+  .account__edit {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .account__edit {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
+
+  @-moz-document url-prefix() {
+    .account__edit {
+       margin-top: 6px;
+      }
+    }
+  }
+
+

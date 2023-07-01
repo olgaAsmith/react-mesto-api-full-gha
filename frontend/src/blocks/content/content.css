@@ -1,0 +1,10 @@
+.content { /*размеры main content блока для выравнивания некоторых секций при меньшем экране*/
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 940px){
+  .content {
+    width: calc(100% - 38px);
+  }
+}

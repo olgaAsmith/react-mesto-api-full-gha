@@ -1,0 +1,12 @@
+.button {
+  background-color: #000;
+  border: none;
+  padding: 0;
+  color: #FFF;
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.button:hover { /*наведение*/
+  opacity: .6;
+}

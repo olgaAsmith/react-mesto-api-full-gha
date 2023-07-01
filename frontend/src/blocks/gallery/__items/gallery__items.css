@@ -1,0 +1,11 @@
+.gallery__items { /*элементы галереи*/
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 20px 17px;
+}
+
+@media screen and (max-width: 480px){
+  .gallery__items {
+    gap: 20px;
+  }
+}

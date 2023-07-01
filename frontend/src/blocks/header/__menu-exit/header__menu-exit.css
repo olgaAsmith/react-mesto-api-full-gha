@@ -1,0 +1,15 @@
+.header__menu-exit {
+  color: #a9a9a9;
+}
+
+@media screen and (max-width: 920px) {
+  .header__menu-exit {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header__menu-exit {
+    margin-right: 0;
+  }
+}

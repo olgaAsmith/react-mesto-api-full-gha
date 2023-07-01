@@ -1,0 +1,19 @@
+.title {
+  width: calc(100% - 72px);
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+@media screen and (max-width: 620px){
+  .title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .title {
+    width: calc(100% - 44px);
+  }
+}

@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px rgba(84, 84, 84, 0.7) solid;
+}
+
+@media screen and (max-width: 480px) {
+  .header {
+    flex-wrap: wrap-reverse;
+  }
+}
