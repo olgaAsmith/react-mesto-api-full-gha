@@ -1,5 +1,3 @@
-import userEvent from "@testing-library/user-event";
-
 //*API
 export default class Api {
   constructor({ baseUrl, headers }) {
