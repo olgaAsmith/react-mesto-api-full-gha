@@ -21,7 +21,10 @@ export default class Api {
 
   getCardsData() {
     return fetch(`${this._url}cards`, {
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
     }).then(this._check);
   }
 
