@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
 const router = require('./routes/routes');
 const { authorize } = require('./middlewares/auth');
 const {
@@ -16,10 +16,8 @@ const celebrate = require('./middlewares/celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-app.use(cors({
-  credentials: true,
-}));
 
+app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
