@@ -6,6 +6,8 @@ const InternalServerError = require('../errors/InternalServerError');
 const Conflict = require('../errors/Conflict');
 const NotFound = require('../errors/NotFound');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then((hashed) => {
@@ -35,7 +37,7 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'secret',
+        NODE_ENV === 'production' ? JWT_SECRET : 'secret',
       );
       res.cookie('token', token, {
         maxAge: 604800000,

@@ -5,6 +5,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 const authorize = (req, res, next) => {
   const token = req.headers.authorization;
+  //req.cookies.token;
   if (!token || !token.includes('Bearer')) {
     return next(new IncorrectData('Пройдите авторизацию'));
   }
