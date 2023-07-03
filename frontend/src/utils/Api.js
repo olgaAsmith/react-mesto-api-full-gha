@@ -55,7 +55,6 @@ export default class Api {
   }
 
   likeCard(cardId, isLiked) {
-    console.log(isLiked);
     if (isLiked) {
       return fetch(`${this._url}cards/${cardId}/likes`, {
         method: "PUT",
@@ -81,7 +80,7 @@ export default class Api {
 }
 
 export const api = new Api({
-  baseUrl: "http://localhost:3000/",
+  baseUrl: "http://api.mesto-solarsystem.nomoreparties.sbs/",
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
