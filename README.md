@@ -11,4 +11,4 @@ IP-адрес 51.250.6.156
 
 Frontend https://mesto-solarsystem.nomoreparties.sbs
 
-Backend https://йзшюmesto-solarsystem.nomoreparties.sbs
+Backend https://api.mesto-solarsystem.nomoreparties.sbs
