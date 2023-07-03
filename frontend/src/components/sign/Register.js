@@ -19,7 +19,7 @@ function Register(props) {
     e.preventDefault();
     registration(formValue.email, formValue.password)
     .then((res) => {
-      if (res.data) {
+      if (!res.message) {
         props.handleInfoTooltipClick(true);
         navigate("/sign-in", { replace: true });
       } else {

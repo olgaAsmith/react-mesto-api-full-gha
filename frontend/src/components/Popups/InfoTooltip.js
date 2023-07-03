@@ -6,7 +6,6 @@ function InfoTooltip(props) {
       className={`popup popup_info-tooltip
     ${props.isOpen ? "popup_opened" : ""}`}
     >
-      {console.log(props.isSuccessReg)}
       <div className="popup__container popup__container_info-tooltip">
         <div className="popup__min-container">
           <div

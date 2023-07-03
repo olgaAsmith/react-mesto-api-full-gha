@@ -21,10 +21,7 @@ export default class Api {
 
   getCardsData() {
     return fetch(`${this._url}cards`, {
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('token')}`,
-      }
+      headers: this._headers,
     }).then(this._check);
   }
 
@@ -58,6 +55,7 @@ export default class Api {
   }
 
   likeCard(cardId, isLiked) {
+    console.log(isLiked);
     if (isLiked) {
       return fetch(`${this._url}cards/${cardId}/likes`, {
         method: "PUT",
@@ -83,9 +81,10 @@ export default class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://api.mesto-solarsystem.nomoreparties.sbs",
+  baseUrl: "http://localhost:3000/",
   headers: {
     "Content-Type": "application/json",
-    authorization: `Bearer ${localStorage.getItem('token')}`,
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    "credentials": "include",
   },
 });

@@ -3,9 +3,9 @@ import { CurrentUserContext } from "../context/CurrentUserContext";
 
 function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = props.owner._id === currentUser._id;
+  const isOwn = props.owner.includes(currentUser._id);
   const isLiked = props.likes.some(
-    (likeOwner) => likeOwner._id === currentUser._id
+    (likeOwner) => likeOwner.includes(currentUser._id)
   );
   const cardLikeButtonClassName = `gallery__item-like ${
     isLiked && "gallery__item-like_active"
@@ -31,11 +31,11 @@ function Card(props) {
       />
       {isOwn && (
         <button
-          className="button gallery__trash"
-          type="button"
-          onClick={handleDeleteClick}
+        className="button gallery__trash"
+        type="button"
+        onClick={handleDeleteClick}
         ></button>
-      )}
+        )}
       <div className="gallery__info">
         <h2 className="gallery__item-name">{props.name}</h2>
         <div className="gallery__like-block">

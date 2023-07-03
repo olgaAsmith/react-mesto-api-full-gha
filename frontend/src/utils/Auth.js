@@ -1,8 +1,9 @@
 export const registration = (email, password) => {
-  return fetch('https://api.mesto-solarsystem.nomoreparties.sbs/signup', {
+  return fetch('http://localhost:3000/signup', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      credentials: 'include',
     },
     body: JSON.stringify({password, email})
   })
@@ -16,10 +17,11 @@ export const registration = (email, password) => {
 };
 
 export const authorize = (email, password) => {
-  return fetch('https://api.mesto-solarsystem.nomoreparties.sbs/signin', {
+  return fetch('http://localhost:3000/signin', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      credentials: 'include',
     },
     body: JSON.stringify({password, email})
   })
@@ -34,11 +36,12 @@ export const authorize = (email, password) => {
 };
 
 export const checkToken = (token) => {
-  return fetch('https://api.mesto-solarsystem.nomoreparties.sbs/users/me', {
+  return fetch('http://localhost:3000/users/me', {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
       "Authorization" : `Bearer ${token}`,
+      credentials: 'include',
     }
   })
   .then(res => res.json())

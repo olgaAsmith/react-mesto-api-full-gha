@@ -88,7 +88,7 @@ function App() {
 
   //*like card
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((owner) => owner._id === currentUser._id);
+    const isLiked = card.likes.some((owner) => owner.includes(currentUser._id));
     api
       .likeCard(card._id, !isLiked)
       .then((newCard) => {
@@ -169,9 +169,9 @@ function App() {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       checkToken(jwt)
-        .then((res) => {
+      .then((res) => {
           if (res) {
-            SetUserEmail(res.data.email);
+            SetUserEmail(res.email);
             SetIsLogIn(true);
             navigate("/", { replace: true });
           }
@@ -238,7 +238,7 @@ function App() {
             />
             <Route
               path="/sign-in"
-              element={<Login handleLogin={handleLogin} />}
+              element={<Login handleLogin={handleLogin}/>}
             />
           </Routes>
           <Footer />

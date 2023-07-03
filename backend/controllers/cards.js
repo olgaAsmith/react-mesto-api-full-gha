@@ -46,6 +46,7 @@ const deleteCard = (req, res, next) => {
 
 const getAllCards = (req, res, next) => {
   Card.find()
+    .sort({ _id: -1 })
     .then((cards) => {
       res.status(200).json(cards);
     })

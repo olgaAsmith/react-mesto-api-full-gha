@@ -28,6 +28,7 @@ function Main({
             alt="Карандаш"
             className="account__image-edit"
           />
+          
         </div>
         <div className="account__owner">
           <h1 className="account__name">{currentUser.name}</h1>

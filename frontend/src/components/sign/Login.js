@@ -22,7 +22,6 @@ function Login(props) {
     }
     authorize(formValue.email, formValue.password)
       .then((data) => {
-        console.log(data);
         if (data.token) {
           setFormValue({ email: "", password: "" });
           props.handleLogin();
