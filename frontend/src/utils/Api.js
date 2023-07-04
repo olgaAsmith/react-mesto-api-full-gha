@@ -15,23 +15,23 @@ export default class Api {
 
   getUserData() {
     return fetch(`${this._url}users/me`, {
-      credentials: "include",
       headers: this._headers,
+      credentials: "include",
     }).then(this._check);
   }
 
   getCardsData() {
     return fetch(`${this._url}cards`, {
-      credentials: "include",
       headers: this._headers,
+      credentials: "include",
     }).then(this._check);
   }
 
   editUserInfo(accountName, accountProf) {
     return fetch(`${this._url}users/me`, {
-      credentials: "include",
       method: "PATCH",
       headers: this._headers,
+      credentials: "include",
       body: JSON.stringify({
         name: accountName,
         about: accountProf,
@@ -41,9 +41,9 @@ export default class Api {
 
   createCard(cardName, cardLink) {
     return fetch(`${this._url}cards`, {
-      credentials: "include",
       method: "POST",
       headers: this._headers,
+      credentials: "include",
       body: JSON.stringify({
         name: cardName,
         link: cardLink,
@@ -53,36 +53,36 @@ export default class Api {
 
   removeCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
-      credentials: "include",
       method: "DELETE",
       headers: this._headers,
+      credentials: "include",
     }).then(this._check);
   }
 
   likeCard(cardId, isLiked) {
     if (isLiked) {
       return fetch(`${this._url}cards/${cardId}/likes`, {
-      credentials: "include",
         method: "PUT",
         headers: this._headers,
+        credentials: "include",
       }).then(this._check);
     } else {
       return fetch(`${this._url}cards/${cardId}/likes`, {
-      credentials: "include",
         method: "DELETE",
         headers: this._headers,
+        credentials: "include",
       }).then(this._check);
     }
   }
 
   setAvatar(avatarNew) {
     return fetch(`${this._url}users/me/avatar`, {
-      credentials: "include",
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: avatarNew,
       }),
+      credentials: "include",
     }).then(this._check);
   }
 }
