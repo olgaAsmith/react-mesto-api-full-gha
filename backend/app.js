@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
-const cors = require('./middlewares/cors');
+const cors = require('cors');
 const router = require('./routes/routes');
 const { authorize } = require('./middlewares/auth');
 const {
@@ -16,8 +16,16 @@ const celebrate = require('./middlewares/celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+app.use(cors({
+  origin: ['https://mesto-solarsystem.nomoreparties.sbs',
+    'http://mesto-solarsystem.nomoreparties.sbs',
+    'https://api.mesto-solarsystem.nomoreparties.sbs',
+    'http://api.mesto-solarsystem.nomoreparties.sbs',
+    'http://localhost:3000',
+    'https://localhost:3000'],
+  credentials: true,
+}));
 
-app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

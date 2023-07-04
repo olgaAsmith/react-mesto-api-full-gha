@@ -15,18 +15,21 @@ export default class Api {
 
   getUserData() {
     return fetch(`${this._url}users/me`, {
+      credentials: "include",
       headers: this._headers,
     }).then(this._check);
   }
 
   getCardsData() {
     return fetch(`${this._url}cards`, {
+      credentials: "include",
       headers: this._headers,
     }).then(this._check);
   }
 
   editUserInfo(accountName, accountProf) {
     return fetch(`${this._url}users/me`, {
+      credentials: "include",
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -38,6 +41,7 @@ export default class Api {
 
   createCard(cardName, cardLink) {
     return fetch(`${this._url}cards`, {
+      credentials: "include",
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -49,6 +53,7 @@ export default class Api {
 
   removeCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
+      credentials: "include",
       method: "DELETE",
       headers: this._headers,
     }).then(this._check);
@@ -57,11 +62,13 @@ export default class Api {
   likeCard(cardId, isLiked) {
     if (isLiked) {
       return fetch(`${this._url}cards/${cardId}/likes`, {
+      credentials: "include",
         method: "PUT",
         headers: this._headers,
       }).then(this._check);
     } else {
       return fetch(`${this._url}cards/${cardId}/likes`, {
+      credentials: "include",
         method: "DELETE",
         headers: this._headers,
       }).then(this._check);
@@ -70,6 +77,7 @@ export default class Api {
 
   setAvatar(avatarNew) {
     return fetch(`${this._url}users/me/avatar`, {
+      credentials: "include",
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -84,6 +92,5 @@ export const api = new Api({
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
-    "credentials": "include",
   },
 });
