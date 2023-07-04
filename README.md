@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.6.156
+IP 51.250.6.156
 
 Frontend https://mesto-solarsystem.nomoreparties.sbs
 

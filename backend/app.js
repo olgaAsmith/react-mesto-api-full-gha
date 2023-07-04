@@ -17,7 +17,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
