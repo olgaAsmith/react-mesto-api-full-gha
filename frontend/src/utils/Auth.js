@@ -3,8 +3,8 @@ export const registration = (email, password) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      credentials: 'include',
     },
+    credentials: 'include',
     body: JSON.stringify({password, email})
   })
   .then((response) => {
@@ -21,8 +21,8 @@ export const authorize = (email, password) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      credentials: 'include',
     },
+    credentials: 'include',
     body: JSON.stringify({password, email})
   })
   .then((response => response.json()))
@@ -41,8 +41,8 @@ export const checkToken = (token) => {
     headers: {
       "Content-Type": "application/json",
       "Authorization" : `Bearer ${token}`,
-      credentials: 'include',
     }
+    credentials: 'include',
   })
   .then(res => res.json())
   .then(data => data)
