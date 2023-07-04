@@ -1,11 +1,6 @@
 const allowedCors = [
   'https://mesto-solarsystem.nomoreparties.sbs',
   'http://mesto-solarsystem.nomoreparties.sbs',
-  'https://api.mesto-solarsystem.nomoreparties.sbs',
-  'http://api.mesto-solarsystem.nomoreparties.sbs',
-  'http://localhost:3000',
-  'https://localhost:3000',
-
 ];
 
 const cors = (req, res, next) => {

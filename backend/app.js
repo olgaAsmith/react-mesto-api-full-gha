@@ -18,8 +18,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const app = express();
 app.use(cors({
   origin: [
-    'https://api.mesto-solarsystem.nomoreparties.sbs/',
-    'http://api.mesto-solarsystem.nomoreparties.sbs/',
+    'https://mesto-solarsystem.nomoreparties.sbs',
+    'http://mesto-solarsystem.nomoreparties.sbs',
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   credentials: true,
