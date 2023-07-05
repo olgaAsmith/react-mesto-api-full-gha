@@ -1,5 +1,3 @@
-import { url } from "./server";
-
 //*API
 export default class Api {
   constructor({ baseUrl, headers }) {
@@ -90,7 +88,7 @@ export default class Api {
 }
 
 export const api = new Api({
-  baseUrl: `${url}/`,
+  baseUrl: "https://api.mesto-solarsystem.nomoreparties.sbs/",
   headers: {
     "Content-Type": "application/json",
     authorization: `Bearer ${localStorage.getItem('jwt')}`,

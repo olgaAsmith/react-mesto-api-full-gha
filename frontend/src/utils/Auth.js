@@ -1,7 +1,5 @@
-import { url } from "./server";
-
 export const registration = (email, password) => {
-  return fetch(`${url}/signup`, {
+  return fetch('https://api.mesto-solarsystem.nomoreparties.sbs/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,7 +17,7 @@ export const registration = (email, password) => {
 };
 
 export const authorize = (email, password) => {
-  return fetch(`${url}/signin`, {
+  return fetch('https://api.mesto-solarsystem.nomoreparties.sbs/signin', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -38,7 +36,7 @@ export const authorize = (email, password) => {
 };
 
 export const checkToken = (token) => {
-  return fetch(`${url}/users/me`, {
+  return fetch('https://api.mesto-solarsystem.nomoreparties.sbs/users/me', {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
