@@ -26,12 +26,12 @@ export const authorize = (email, password) => {
     body: JSON.stringify({password, email})
   })
   .then((response => response.json()))
-  .then((data) => {
+  /* .then((data) => {
     if (data.token){
       localStorage.setItem('jwt', data.token);
       return data;
     }
-  })
+  }) */
   .catch(err => console.log(err))
 };
 
@@ -40,7 +40,7 @@ export const checkToken = (token) => {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
-      "Authorization" : `Bearer ${token}`,
+      /* "Authorization" : `Bearer ${token}`, */
     },
     credentials: 'include',
   })

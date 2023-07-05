@@ -91,6 +91,6 @@ export const api = new Api({
   baseUrl: "https://api.mesto-solarsystem.nomoreparties.sbs/",
   headers: {
     "Content-Type": "application/json",
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    /* authorization: `Bearer ${localStorage.getItem('jwt')}`, */
   },
 });
