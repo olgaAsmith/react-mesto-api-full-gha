@@ -1,5 +1,7 @@
+import { hostURL } from "./config";
+
 export const registration = (email, password) => {
-  return fetch('http://localhost:3000/signup', {
+  return fetch(`${hostURL}signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +19,7 @@ export const registration = (email, password) => {
 };
 
 export const authorize = (email, password) => {
-  return fetch('http://localhost:3000/signin', {
+  return fetch(`${hostURL}signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +35,7 @@ export const authorize = (email, password) => {
 };
 
 export const checkToken = () => {
-  return fetch('http://localhost:3000/users/me', {
+  return fetch(`${hostURL}users/me`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
@@ -49,7 +51,7 @@ export const checkToken = () => {
 }
 
 export const logout = () => {
-  return fetch('http://localhost:3000/logout', {
+  return fetch(`${hostURL}logout`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",

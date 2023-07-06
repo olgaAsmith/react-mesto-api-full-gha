@@ -1,3 +1,5 @@
+import { hostURL } from "./config";
+
 //*API
 export default class Api {
   constructor({ baseUrl, headers }) {
@@ -88,7 +90,7 @@ export default class Api {
 }
 
 export const api = new Api({
-  baseUrl: "http://localhost:3000/",
+  baseUrl: hostURL,
   headers: {
     "Content-Type": "application/json",
   },
