@@ -1,8 +1,8 @@
 class ValidateError extends Error {
-  constructor() {
+  constructor(message) {
     super();
     this.statusCode = 400;
-    this.message = 'Введены некорректные данные';
+    this.message = message;
   }
 }
 

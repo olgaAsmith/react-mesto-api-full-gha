@@ -8,10 +8,10 @@ const cors = require('./middlewares/cors');
 const router = require('./routes/routes');
 const { authorize } = require('./middlewares/auth');
 const {
-  createUser, login,
+  createUser, login, logout,
 } = require('./controllers/users');
 const errorType = require('./middlewares/error');
-const NotExist = require('./errors/NotExist');
+const NotFound = require('./errors/NotFound');
 const celebrate = require('./middlewares/celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -38,10 +38,11 @@ app.get('/crash-test', () => {
 
 app.post('/signup', celebrate.userInfo, createUser);
 app.post('/signin', celebrate.userInfo, login);
+app.get('/logout', logout);
 app.use(authorize);
 app.use(router);
 app.use('/*', (req, res, next) => {
-  next(new NotExist());
+  next(new NotFound('Такой страницы не существует'));
 });
 app.use(errorLogger);
 app.use(errors()); // celebrate errors

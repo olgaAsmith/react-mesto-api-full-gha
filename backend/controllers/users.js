@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ValidateError = require('../errors/ValidateError');
-const InternalServerError = require('../errors/InternalServerError');
 const Conflict = require('../errors/Conflict');
 const NotFound = require('../errors/NotFound');
 
@@ -19,12 +18,12 @@ const createUser = (req, res, next) => {
           },
         ))
         .catch((error) => {
-          if (error.message.includes('validation failed')) {
-            next(new ValidateError());
+          if (error.code === 400) {
+            next(new ValidateError('Введены некорректные данные'));
           } else if (error.code === 11000) {
-            next(new Conflict());
+            next(new Conflict('Пользователь с такими данными уже существует'));
           } else {
-            next(new InternalServerError());
+            next();
           }
         });
     })
@@ -52,31 +51,31 @@ const getUserMe = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => res.status(200).send(user))
     .catch(() => {
-      next(new InternalServerError());
+      next();
     });
 };
 
-const getUser = (req, res, next) => {
+const getUsers = (req, res, next) => {
   User.find()
     .then((users) => {
       res.status(200).json(users);
     })
     .catch(() => {
-      next(new InternalServerError());
+      next();
     });
 };
 
 const getUserByID = (req, res, next) => {
   User.findById(req.params.id)
-    .orFail(() => new Error('User not found'))
+    .orFail(() => new NotFound('Данные не найдены'))
     .then((user) => res.status(200).send(user))
     .catch((error) => {
       if (error.name === 'CastError') {
-        next(new ValidateError());
+        next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'User not found') {
-        next(new NotFound());
+        next(new NotFound('Данные не найдены'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };
@@ -87,12 +86,12 @@ const updateUserinfo = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, info, { new: true, runValidators: true })
     .then((user) => res.status(200).send({ user }))
     .catch((error) => {
-      if (error.message.includes('validation failed')) {
-        next(new ValidateError());
+      if (error.code === 400) {
+        next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'User not found') {
-        next(new NotFound());
+        next(new NotFound('Данные не найдены'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };
@@ -103,16 +102,21 @@ const updateUserAvatar = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, newAvatar, { new: true, runValidators: true })
     .then((user) => res.status(200).send({ user }))
     .catch((error) => {
-      if (error.message.includes('validation failed')) {
-        next(new ValidateError());
+      if (error.code === 400) {
+        next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'User not found') {
-        next(new NotFound());
+        next(new NotFound('Данные не найдены'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };
 
+const logout = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).send({ message: 'Выход выполнен успешно' });
+};
+
 module.exports = {
-  getUser, createUser, getUserByID, updateUserinfo, updateUserAvatar, login, getUserMe,
+  getUsers, createUser, getUserByID, updateUserinfo, updateUserAvatar, login, getUserMe, logout,
 };

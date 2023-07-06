@@ -1,8 +1,8 @@
 class Forbidden extends Error {
-  constructor() {
+  constructor(message) {
     super();
     this.statusCode = 403;
-    this.message = 'Нельзя удалить чужие данные';
+    this.message = message;
   }
 }
 

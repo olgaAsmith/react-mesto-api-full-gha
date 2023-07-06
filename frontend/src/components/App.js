@@ -14,7 +14,7 @@ import Login from "./sign/Login";
 import Register from "./sign/Register";
 import InfoTooltip from "./Popups/InfoTooltip";
 import ProtectedRoute from "./ProtectedRoute";
-import { checkToken } from "../utils/Auth";
+import { checkToken, logout } from "../utils/Auth";
 
 function App() {
   //*pops
@@ -155,20 +155,26 @@ function App() {
   //*LOGGED ingo
   const handleLogin = () => {
     SetIsLogIn(true);
-    handleTokenCheck();
   };
+
   const handleLogout = () => {
-    SetIsLogIn(false);
+    logout()
+    .then(() => {
+      SetIsLogIn(false);
+      localStorage.removeItem('token');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   //*TOKEN
   React.useEffect(() => {
     handleTokenCheck();
   }, []);
+
   const handleTokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
-      checkToken(jwt)
+      checkToken()
       .then((res) => {
           if (res) {
             SetUserEmail(res.email);
@@ -179,8 +185,8 @@ function App() {
         .catch((error) => {
           console.log(error);
         });
-    }
   };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -242,19 +248,16 @@ function App() {
             />
           </Routes>
           <Footer />
-          //*POPUPS //& edit profile
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopup}
             onUpdateUser={handleUpdateUser}
           ></EditProfilePopup>
-          //& new place
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopup}
             onAddPlace={handleNewPlace}
           ></AddPlacePopup>
-          //& are you sure?
           <PopupWithForm
             popupName="popup_delete-card-question"
             containerName="popup__container_delete-card"
@@ -263,7 +266,6 @@ function App() {
             buttonClassName="popup__button-say-yes"
             buttonText="Да"
           ></PopupWithForm>
-          //& new avatar
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopup}

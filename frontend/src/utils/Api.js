@@ -88,9 +88,8 @@ export default class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://api.mesto-solarsystem.nomoreparties.sbs/",
+  baseUrl: "http://localhost:3000/",
   headers: {
     "Content-Type": "application/json",
-    authorization: `Bearer ${localStorage.getItem('jwt')}`,
   },
 });

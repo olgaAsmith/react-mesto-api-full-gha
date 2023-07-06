@@ -1,6 +1,5 @@
 const Card = require('../models/card');
 const ValidateError = require('../errors/ValidateError');
-const InternalServerError = require('../errors/InternalServerError');
 const IncorrectData = require('../errors/IncorrectData');
 const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
@@ -13,33 +12,32 @@ const createCard = (req, res, next) => {
     .then((card) => res.status(201).send(card))
     .catch((error) => {
       if (error.message.includes('validation failed')) {
-        next(new ValidateError());
+        next(new ValidateError('Введены некорректные данные'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };
 
 const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
-    .orFail(() => new Error('Card not found'))
+    .orFail(() => new NotFound('Данные не найдены'))
     .then((card) => {
       if (card.owner.includes(req.user._id)) {
-        card.deleteOne()
+        return card.deleteOne()
           .then(() => res.status(200).send({
             message: 'Карточка успешно удалена',
           }));
-      } else {
-        next(new Forbidden());
       }
+      return next(new Forbidden('Нельзя удалить чужие данные'));
     })
     .catch((error) => {
       if (error.name === 'CastError') {
-        next(new ValidateError());
+        next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'Card not found' || error.message === 'Not Found') {
-        next(new NotFound());
+        next(new NotFound('Данные не найдены'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };
@@ -50,11 +48,11 @@ const getAllCards = (req, res, next) => {
     .then((cards) => {
       res.status(200).json(cards);
     })
-    .catch((error) => {
-      if (error.message.includes('validation failed')) {
+    .catch(() => {
+      if (!req.cookie.token) {
         next(new IncorrectData('Доступно только для авторизованных пользователей'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };
@@ -65,17 +63,17 @@ const likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(() => new Error('Card not found'))
+    .orFail(() => new NotFound('Данные не найдены'))
     .then((card) => {
       res.status(200).send(card);
     })
     .catch((error) => {
       if (error.name === 'CastError') {
-        next(new ValidateError());
+        next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'Card not found' || error.message === 'Not Found') {
-        next(new NotFound());
+        next(new NotFound('Данные не найдены'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };
@@ -86,17 +84,17 @@ const dislikeCard = (req, res, next) => {
     { $pull: { likes: req.user._id } },
     { new: true },
   )
-    .orFail(() => new Error('Card not found'))
+    .orFail(() => new NotFound('Данные не найдены'))
     .then((card) => {
       res.status(200).send(card);
     })
     .catch((error) => {
       if (error.name === 'CastError') {
-        next(new ValidateError());
+        next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'Not found' || error.message === 'Card not found') {
-        next(new NotFound());
+        next(new NotFound('Данные не найдены'));
       } else {
-        next(new InternalServerError());
+        next();
       }
     });
 };

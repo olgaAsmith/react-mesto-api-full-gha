@@ -21,12 +21,10 @@ function Login(props) {
       return;
     }
     authorize(formValue.email, formValue.password)
-      .then((data) => {
-        if (data.token) {
-          setFormValue({ email: "", password: "" });
-          props.handleLogin();
-          navigate("/mesto-react", { replace: true });
-        }
+      .then(() => {
+        setFormValue({ email: "", password: "" });
+        props.handleLogin();
+        navigate("/mesto-react", { replace: true });
       })
       .catch((err) => console.log(err));
   };

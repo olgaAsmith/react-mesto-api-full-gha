@@ -1,8 +1,8 @@
 class Conflict extends Error {
-  constructor() {
+  constructor(message) {
     super();
     this.statusCode = 409;
-    this.message = 'Пользователь с такими данными уже существует';
+    this.message = message;
   }
 }
 
