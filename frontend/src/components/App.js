@@ -161,7 +161,6 @@ function App() {
     logout()
     .then(() => {
       SetIsLogIn(false);
-      localStorage.removeItem('token');
     })
     .catch((error) => {
       console.log(error);

@@ -11,10 +11,10 @@ const createCard = (req, res, next) => {
   Card.create(newCard)
     .then((card) => res.status(201).send(card))
     .catch((error) => {
-      if (error.message.includes('validation failed')) {
+      if (error.name === 'ValidationError') {
         next(new ValidateError('Введены некорректные данные'));
       } else {
-        next();
+        next(error);
       }
     });
 };
@@ -23,7 +23,7 @@ const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .orFail(() => new NotFound('Данные не найдены'))
     .then((card) => {
-      if (card.owner.includes(req.user._id)) {
+      if (card.owner === req.user._id) {
         return card.deleteOne()
           .then(() => res.status(200).send({
             message: 'Карточка успешно удалена',
@@ -37,7 +37,7 @@ const deleteCard = (req, res, next) => {
       } else if (error.message === 'Card not found' || error.message === 'Not Found') {
         next(new NotFound('Данные не найдены'));
       } else {
-        next();
+        next(error);
       }
     });
 };
@@ -48,11 +48,11 @@ const getAllCards = (req, res, next) => {
     .then((cards) => {
       res.status(200).json(cards);
     })
-    .catch(() => {
+    .catch((error) => {
       if (!req.cookie.token) {
         next(new IncorrectData('Доступно только для авторизованных пользователей'));
       } else {
-        next();
+        next(error);
       }
     });
 };
@@ -70,11 +70,8 @@ const likeCard = (req, res, next) => {
     .catch((error) => {
       if (error.name === 'CastError') {
         next(new ValidateError('Введены некорректные данные'));
-      } else if (error.message === 'Card not found' || error.message === 'Not Found') {
-        next(new NotFound('Данные не найдены'));
-      } else {
-        next();
       }
+      next(error);
     });
 };
 
@@ -91,11 +88,8 @@ const dislikeCard = (req, res, next) => {
     .catch((error) => {
       if (error.name === 'CastError') {
         next(new ValidateError('Введены некорректные данные'));
-      } else if (error.message === 'Not found' || error.message === 'Card not found') {
-        next(new NotFound('Данные не найдены'));
-      } else {
-        next();
       }
+      next(error);
     });
 };
 

@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('mongoose');
 const User = require('../models/user');
 const ValidateError = require('../errors/ValidateError');
 const Conflict = require('../errors/Conflict');
@@ -18,12 +19,12 @@ const createUser = (req, res, next) => {
           },
         ))
         .catch((error) => {
-          if (error.code === 400) {
+          if (error.name === 'ValidationError') {
             next(new ValidateError('Введены некорректные данные'));
           } else if (error.code === 11000) {
             next(new Conflict('Пользователь с такими данными уже существует'));
           } else {
-            next();
+            next(error);
           }
         });
     })
@@ -42,7 +43,7 @@ const login = (req, res, next) => {
         maxAge: 604800000,
         httpOnly: true,
       });
-      res.send({ token });
+      res.send({ message: 'Успешно' });
     })
     .catch(next);
 };
@@ -50,9 +51,7 @@ const login = (req, res, next) => {
 const getUserMe = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => res.status(200).send(user))
-    .catch(() => {
-      next();
-    });
+    .catch(next);
 };
 
 const getUsers = (req, res, next) => {
@@ -60,9 +59,7 @@ const getUsers = (req, res, next) => {
     .then((users) => {
       res.status(200).json(users);
     })
-    .catch(() => {
-      next();
-    });
+    .catch(next);
 };
 
 const getUserByID = (req, res, next) => {
@@ -70,13 +67,10 @@ const getUserByID = (req, res, next) => {
     .orFail(() => new NotFound('Данные не найдены'))
     .then((user) => res.status(200).send(user))
     .catch((error) => {
-      if (error.name === 'CastError') {
+      if (error.name === 'ValidationError') {
         next(new ValidateError('Введены некорректные данные'));
-      } else if (error.message === 'User not found') {
-        next(new NotFound('Данные не найдены'));
-      } else {
-        next();
       }
+      next(error);
     });
 };
 
@@ -86,12 +80,12 @@ const updateUserinfo = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, info, { new: true, runValidators: true })
     .then((user) => res.status(200).send({ user }))
     .catch((error) => {
-      if (error.code === 400) {
+      if (error.name === 'ValidationError') {
         next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'User not found') {
         next(new NotFound('Данные не найдены'));
       } else {
-        next();
+        next(error);
       }
     });
 };
@@ -102,12 +96,12 @@ const updateUserAvatar = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, newAvatar, { new: true, runValidators: true })
     .then((user) => res.status(200).send({ user }))
     .catch((error) => {
-      if (error.code === 400) {
+      if (error.name === 'ValidationError') {
         next(new ValidateError('Введены некорректные данные'));
       } else if (error.message === 'User not found') {
         next(new NotFound('Данные не найдены'));
       } else {
-        next();
+        next(error);
       }
     });
 };
