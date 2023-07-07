@@ -23,7 +23,7 @@ const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .orFail(() => new NotFound('Данные не найдены'))
     .then((card) => {
-      if (card.owner === req.user._id) {
+      if (card.owner.toString() === req.user._id) {
         return card.deleteOne()
           .then(() => res.status(200).send({
             message: 'Карточка успешно удалена',
