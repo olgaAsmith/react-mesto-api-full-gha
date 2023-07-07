@@ -34,5 +34,5 @@ app.use(errors()); // celebrate errors
 app.use(errorType);
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
-  console.log('Start...is 0k');
+  console.log('Start...is 0k1');
 });
