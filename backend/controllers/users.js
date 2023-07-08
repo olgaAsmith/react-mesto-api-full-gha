@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('mongoose');
 const User = require('../models/user');
-const ValidateError = require('../errors/ValidateError');
 const Conflict = require('../errors/Conflict');
 const NotFound = require('../errors/NotFound');
 
@@ -19,9 +18,7 @@ const createUser = (req, res, next) => {
           },
         ))
         .catch((error) => {
-          if (error.name === 'ValidationError') {
-            next(new ValidateError('Введены некорректные данные'));
-          } else if (error.code === 11000) {
+          if (error.code === 11000) {
             next(new Conflict('Пользователь с такими данными уже существует'));
           } else {
             next(error);
@@ -66,12 +63,7 @@ const getUserByID = (req, res, next) => {
   User.findById(req.params.id)
     .orFail(() => new NotFound('Данные не найдены'))
     .then((user) => res.status(200).send(user))
-    .catch((error) => {
-      if (error.name === 'ValidationError') {
-        next(new ValidateError('Введены некорректные данные'));
-      }
-      next(error);
-    });
+    .catch(next);
 };
 
 const updateUserinfo = (req, res, next) => {
@@ -79,15 +71,7 @@ const updateUserinfo = (req, res, next) => {
   const info = { name, about };
   User.findByIdAndUpdate(req.user._id, info, { new: true, runValidators: true })
     .then((user) => res.status(200).send({ user }))
-    .catch((error) => {
-      if (error.name === 'ValidationError') {
-        next(new ValidateError('Введены некорректные данные'));
-      } else if (error.message === 'User not found') {
-        next(new NotFound('Данные не найдены'));
-      } else {
-        next(error);
-      }
-    });
+    .catch(next);
 };
 
 const updateUserAvatar = (req, res, next) => {
@@ -95,15 +79,7 @@ const updateUserAvatar = (req, res, next) => {
   const newAvatar = { avatar };
   User.findByIdAndUpdate(req.user._id, newAvatar, { new: true, runValidators: true })
     .then((user) => res.status(200).send({ user }))
-    .catch((error) => {
-      if (error.name === 'ValidationError') {
-        next(new ValidateError('Введены некорректные данные'));
-      } else if (error.message === 'User not found') {
-        next(new NotFound('Данные не найдены'));
-      } else {
-        next(error);
-      }
-    });
+    .catch(next);
 };
 
 const logout = (req, res) => {

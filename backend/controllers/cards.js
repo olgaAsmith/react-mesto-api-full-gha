@@ -1,6 +1,5 @@
 const Card = require('../models/card');
 const ValidateError = require('../errors/ValidateError');
-const IncorrectData = require('../errors/IncorrectData');
 const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
 
@@ -10,13 +9,7 @@ const createCard = (req, res, next) => {
   const newCard = { name, link, owner };
   Card.create(newCard)
     .then((card) => res.status(201).send(card))
-    .catch((error) => {
-      if (error.name === 'ValidationError') {
-        next(new ValidateError('Введены некорректные данные'));
-      } else {
-        next(error);
-      }
-    });
+    .catch(next);
 };
 
 const deleteCard = (req, res, next) => {
@@ -34,8 +27,6 @@ const deleteCard = (req, res, next) => {
     .catch((error) => {
       if (error.name === 'CastError') {
         next(new ValidateError('Введены некорректные данные'));
-      } else if (error.message === 'Card not found' || error.message === 'Not Found') {
-        next(new NotFound('Данные не найдены'));
       } else {
         next(error);
       }
@@ -48,13 +39,7 @@ const getAllCards = (req, res, next) => {
     .then((cards) => {
       res.status(200).json(cards);
     })
-    .catch((error) => {
-      if (!req.cookie.token) {
-        next(new IncorrectData('Доступно только для авторизованных пользователей'));
-      } else {
-        next(error);
-      }
-    });
+    .catch(next);
 };
 
 const likeCard = (req, res, next) => {
@@ -70,8 +55,9 @@ const likeCard = (req, res, next) => {
     .catch((error) => {
       if (error.name === 'CastError') {
         next(new ValidateError('Введены некорректные данные'));
+      } else {
+        next(error);
       }
-      next(error);
     });
 };
 
@@ -88,8 +74,9 @@ const dislikeCard = (req, res, next) => {
     .catch((error) => {
       if (error.name === 'CastError') {
         next(new ValidateError('Введены некорректные данные'));
+      } else {
+        next(error);
       }
-      next(error);
     });
 };
 
