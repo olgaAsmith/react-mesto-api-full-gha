@@ -1,17 +1,13 @@
-[![Статус тестов](../../actions/workflows/tests.yml/badge.svg)](../../actions/workflows/tests.yml)
-
 # react-mesto-api-full
 Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. 
 
 Адрес репозитория: https://github.com/olgaAsmith/react-mesto-api-full-gha.git
 
-## Ссылки на проект
+## Ссылки:
 
-IP 51.250.6.156
+Frontend https://github.com/olgaAsmith/react-mesto-auth.git
 
-Frontend https://mesto-solarsystem.nomoreparties.sbs
-
-Backend https://api.mesto-solarsystem.nomoreparties.sbs
+Backend https://github.com/olgaAsmith/express-mesto-gha.git
 
 ## Проект Mesto фронтенд + бэкенд 
 
@@ -25,12 +21,6 @@ Backend https://api.mesto-solarsystem.nomoreparties.sbs
 	<code><img width="55" src="https://user-images.githubusercontent.com/25181517/121401671-49102800-c959-11eb-9f6f-74d49a5e1774.png" alt="npm" title="npm"/></code>
 	<code><img width="55" src="https://user-images.githubusercontent.com/25181517/192109061-e138ca71-337c-4019-8d42-4792fdaa7128.png" alt="Postman" title="Postman"/></code>
 </div>
-
-------
-
-##### Github Page
-
-*https://github.com/olgaAsmith/express-mesto-gha.git*
 
 ------
 
